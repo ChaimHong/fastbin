@@ -2,6 +2,7 @@ package fastbin
 
 import (
 	"fmt"
+	"path/filepath"
 	"reflect"
 )
 
@@ -11,7 +12,9 @@ type analyzer struct {
 
 type pkgInfo struct {
 	Path    string
+	PkgName string
 	Types   map[string]*typeInfo
+
 	Imports []string
 }
 
@@ -51,6 +54,7 @@ func (this *analyzer) getPackage(pkgPath string) *pkgInfo {
 	}
 	info := &pkgInfo{
 		Path:    pkgPath,
+		PkgName: filepath.Base(pkgPath),
 		Types:   map[string]*typeInfo{},
 		Imports: []string{},
 	}
